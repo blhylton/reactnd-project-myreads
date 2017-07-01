@@ -3,18 +3,18 @@ import PropTypes from 'prop-types'
 
 class BookEntry extends Component {
   static propTypes = {
-    coverImageUrl: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired
+    authors: PropTypes.array.isRequired
   }
 
   render() {
-    const { coverImageUrl, title, author } = this.props
+    const { thumbnail, title, authors } = this.props
     return (
       <div className="book">
         <div className="book-top">
           <div className="book-cover"
-            style={{ width: 128, height: 193, backgroundImage: 'url("{coverImageUrl}")' }}></div>
+            style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})` }}></div>
           <div className="book-shelf-changer">
             <select>
               <option value="none" disabled>Move to...</option>
@@ -26,7 +26,7 @@ class BookEntry extends Component {
           </div>
         </div>
         <div className="book-title">{ title }</div>
-        <div className="book-authors">{ author }</div>
+        <div className="book-authorss">{ authors.join(', ') }</div>
       </div>
     )
   }

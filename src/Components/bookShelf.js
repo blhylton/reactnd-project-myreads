@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Book from './Components/book'
+import BookEntry from './bookEntry'
 
 class BookShelf extends Component {
   render() {
@@ -10,14 +10,16 @@ class BookShelf extends Component {
         <div className="bookshelf-books">
           <ol className="books-grid">
             {books.map((book) => {
-              <li key={book.id}>
-                <Book
-                  coverImageUrl={book.thumbnail}
-                  title={book.title}
-                  author={book.author}
-                />
-              </li>
-            })}
+              return (
+                <li key={book.id}>
+                  <BookEntry
+                    thumbnail={book.imageLinks.thumbnail}
+                    title={book.title}
+                    authors={book.authors}
+                  />
+                </li>
+              )}
+            )}
           </ol>
         </div>
       </div>
