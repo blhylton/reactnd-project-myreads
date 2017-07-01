@@ -17,13 +17,14 @@ class BooksApp extends React.Component {
       wantToRead: "Want to Read",
       read: "Read",
     },
-    books: []
+    books: [],
+    apiLoaded: false
   }
 
   componentDidMount = () =>
   {
     BooksAPI.getAll().then((books) => {
-      this.setState({ books })
+      this.setState({ books, apiLoaded: true })
     })
   }
 
@@ -40,13 +41,21 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                {Object.keys(this.state.shelves).map((key) => {
-                  return (
-                  <BookShelf key={key}
-                    title={this.state.shelves[key]}
-                    books={this.state.books.filter((book) => book.shelf === key)}
-                  />
-                )})}
+                {/* This ternary only exists to show the loading animation */}
+                {this.state.apiLoaded ? 
+                  Object.keys(this.state.shelves).map((key) => {
+                    return (
+                    <BookShelf
+                      key={key}
+                      title={this.state.shelves[key]}
+                      books={this.state.books.filter((book) => book.shelf === key)}
+                    />
+                    )})
+                    :
+                    (
+                      <span className="loading">Loading</span>
+                    )
+                  }
               </div>
             </div>
             <div className="open-search">
