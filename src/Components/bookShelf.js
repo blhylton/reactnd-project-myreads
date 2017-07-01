@@ -19,7 +19,7 @@ class BookShelf extends Component {
         <h2 className="bookshelf-title">{title}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {books.length > 0 ? 
+            {books.length > 0 ?
               books.map((book) => {
                 return (
                   <li key={book.id}>
@@ -29,10 +29,11 @@ class BookShelf extends Component {
                       authors={book.authors}
                     />
                   </li>
-              )})
+                )
+              })
               :
               (<span>No books on this shelf.</span>)
-              }
+            }
           </ol>
         </div>
       </div>
