@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
 import BookEntry from './bookEntry'
 import sortBy from 'sort-by'
+import PropTypes from 'prop-types'
 
 class BookShelf extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    books: PropTypes.array
+  }
+
   render() {
-    const { name, books } = this.props
+    const { title, books } = this.props
 
     books.sort(sortBy('title'))
 
