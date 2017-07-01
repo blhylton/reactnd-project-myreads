@@ -2,12 +2,14 @@
 import React from 'react'
 import { Route, Link } from 'react-router-dom'
 
-//Components
+//Child Components
 import SearchBar from './Components/searchBar'
 import BookShelf from './Components/bookShelf'
 
 //Provided API Code
 import * as BooksAPI from './Utils/BooksAPI'
+
+//Styles
 import './App.css'
 
 class BooksApp extends React.Component {

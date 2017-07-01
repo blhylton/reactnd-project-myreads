@@ -1,7 +1,10 @@
+//Librar(y|ies)
 import React, { Component } from 'react'
-import BookEntry from './bookEntry'
 import sortBy from 'sort-by'
 import PropTypes from 'prop-types'
+
+//Child Components
+import BookEntry from './bookEntry'
 
 class BookShelf extends Component {
   static propTypes = {
