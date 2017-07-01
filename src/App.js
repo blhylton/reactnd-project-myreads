@@ -21,8 +21,7 @@ class BooksApp extends React.Component {
     apiLoaded: false
   }
 
-  componentDidMount = () =>
-  {
+  componentDidMount = () => {
     BooksAPI.getAll().then((books) => {
       this.setState({ books, apiLoaded: true })
     })
@@ -41,21 +40,21 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                {/* This ternary only exists to show the loading animation */}
-                {this.state.apiLoaded ? 
-                  Object.keys(this.state.shelves).map((key) => {
-                    return (
+                {this.state.apiLoaded &&
+                  Object.keys(this.state.shelves).map((key) => (
                     <BookShelf
                       key={key}
                       title={this.state.shelves[key]}
                       books={this.state.books.filter((book) => book.shelf === key)}
                     />
-                    )})
-                    :
-                    (
-                      <span className="loading">Loading</span>
-                    )
-                  }
+                  ))
+                }
+
+                {!this.state.apiLoaded &&
+                  (
+                    <span className="loading">Loading</span>
+                  )
+                }
               </div>
             </div>
             <div className="open-search">
