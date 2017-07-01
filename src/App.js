@@ -7,7 +7,7 @@ import SearchBar from './Components/searchBar'
 import BookShelf from './Components/bookShelf'
 
 //Provided API Code
-import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './Utils/BooksAPI'
 import './App.css'
 
 class BooksApp extends React.Component {
