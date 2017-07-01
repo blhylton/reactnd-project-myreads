@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Book extends Component {
+class BookEntry extends Component {
   static propTypes = {
     coverImageUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    author: PropType.string.isRequired
+    author: PropTypes.string.isRequired
   }
 
   render() {
@@ -32,4 +32,4 @@ class Book extends Component {
   }
 }
 
-export default Book
+export default BookEntry
