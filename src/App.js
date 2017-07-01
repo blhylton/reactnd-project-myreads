@@ -27,6 +27,19 @@ class BooksApp extends React.Component {
     })
   }
 
+  moveBook = (book, shelf) => {
+    this.setState({apiLoaded: false})
+    BooksAPI.update(book, shelf).then((s) => {
+      book.shelf = shelf
+      this.setState(
+        {
+          books: this.state.books.filter((b) => book.id !== b.id ).concat(book),
+          apiLoaded: true
+        }
+      )
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -46,6 +59,7 @@ class BooksApp extends React.Component {
                       key={key}
                       title={this.state.shelves[key]}
                       books={this.state.books.filter((book) => book.shelf === key)}
+                      onBookMove={this.moveBook}
                     />
                   ))
                 }

@@ -10,7 +10,7 @@ class BookShelf extends Component {
   }
 
   render() {
-    const { title, books } = this.props
+    const { title, books, onBookMove } = this.props
 
     books.sort(sortBy('title'))
 
@@ -24,9 +24,8 @@ class BookShelf extends Component {
                 return (
                   <li key={book.id}>
                     <BookEntry
-                      thumbnail={book.imageLinks.thumbnail}
-                      title={book.title}
-                      authors={book.authors}
+                      book={book}
+                      onShelfChange={onBookMove}
                     />
                   </li>
                 )
