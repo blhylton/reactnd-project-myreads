@@ -34,7 +34,7 @@ class BookShelf extends Component {
                 )
               })
               :
-              (<span>No books on this shelf.</span>)
+              (<span className="no-shelf">No books match this criterion.</span>)
             }
           </ol>
         </div>

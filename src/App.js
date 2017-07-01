@@ -20,7 +20,9 @@ class BooksApp extends React.Component {
       read: "Read",
     },
     books: [],
-    apiLoaded: false
+    searchedBooks: [],
+    apiLoaded: false,
+    query: ""
   }
 
   componentDidMount = () => {
@@ -30,13 +32,25 @@ class BooksApp extends React.Component {
   }
 
   moveBook = (book, shelf) => {
-    this.setState({apiLoaded: false})
+    this.setState({ apiLoaded: false })
     BooksAPI.update(book, shelf).then((s) => {
       book.shelf = shelf
       this.setState(
         {
-          books: this.state.books.filter((b) => book.id !== b.id ).concat(book),
+          books: this.state.books.filter((b) => book.id !== b.id).concat(book),
           apiLoaded: true
+        }
+      )
+    })
+  }
+
+  searchBooks = (query) => {
+    this.setState({ query })
+    BooksAPI.search(query, 20).then((books) => {
+      books = books || []
+      this.setState(
+        {
+          searchedBooks: books
         }
       )
     })
@@ -46,7 +60,30 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route path="/search" render={() => (
-          <SearchBar />
+          <div>
+            <SearchBar onQuery={this.searchBooks} query={this.state.query} />
+            {this.state.apiLoaded && (
+              <div className="list-books-content">
+                <div>
+                  <BookShelf
+                    key='none'
+                    title="Search Results"
+                    books={
+                      this.state.searchedBooks ? 
+                      this.state.searchedBooks.filter((book) => book.shelf === 'none')
+                      : []}
+                    onBookMove={this.moveBook}
+                  />
+                </div>
+              </div>
+            )}
+
+            {!this.state.apiLoaded &&
+              (
+                <span className="loading">Loading</span>
+              )
+            }
+          </div>
         )} />
         <Route path="/" exact render={() => (
           <div className="list-books">
