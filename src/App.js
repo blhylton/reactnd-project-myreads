@@ -45,14 +45,17 @@ class BooksApp extends React.Component {
   }
 
   searchBooks = (query) => {
-    this.setState({ query })
+    this.setState({ query, apiLoaded: false })
     BooksAPI.search(query, 20).then((books) => {
-      books = books || []
-      this.setState(
-        {
-          searchedBooks: books
-        }
-      )
+      if(this.state.query === query){
+        books = books || []
+        this.setState(
+          {
+            searchedBooks: books,
+            apiLoaded: true
+          }
+        )
+      }
     })
   }
 
@@ -69,9 +72,9 @@ class BooksApp extends React.Component {
                     key='none'
                     title="Search Results"
                     books={
-                      this.state.searchedBooks ? 
-                      this.state.searchedBooks.filter((book) => book.shelf === 'none')
-                      : []}
+                      this.state.searchedBooks ?
+                        this.state.searchedBooks.filter((book) => book.shelf === 'none')
+                        : []}
                     onBookMove={this.moveBook}
                   />
                 </div>
