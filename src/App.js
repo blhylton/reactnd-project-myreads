@@ -72,6 +72,8 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
+
+        {/* Search Page */}
         <Route path="/search" render={() => (
           <div>
             <SearchBar onQuery={this.searchBooks} query={this.state.query} />
@@ -93,6 +95,7 @@ class BooksApp extends React.Component {
           </div>
         )} />
 
+        {/* Index (shelves) */}
         <Route path="/" exact render={() => (
           <div className="list-books">
             <div className="list-books-title">
@@ -118,6 +121,7 @@ class BooksApp extends React.Component {
           </div>
         )} />
 
+        {/* Loading Animation */}
         <Route path="/" render={() =>
           !this.state.apiLoaded &&
           (
