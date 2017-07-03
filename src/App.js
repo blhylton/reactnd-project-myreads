@@ -14,14 +14,19 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
+    //Just the titles of the shelves, matched to the slugs that are returned by the API
     shelves: {
       currentlyReading: "Currently Reading",
       wantToRead: "Want to Read",
       read: "Read",
     },
+    //Contains the shelved books
     books: [],
+    //Contains the books that match search terms after queried
     searchedBooks: [],
+    //Used to show the loading animation
     apiLoaded: false,
+    //Contains the search query
     query: ""
   }
 
@@ -47,7 +52,12 @@ class BooksApp extends React.Component {
   searchBooks = (query) => {
     this.setState({ query, apiLoaded: false })
     BooksAPI.search(query, 20).then((books) => {
-      if(this.state.query === query){
+      /**
+       * Check to see if query has changed before replacing books with newly searched books. Solves a race condition
+       * where occasionally the later results would return faster, thus ending up with inaccurate results after all
+       * queries had run their course.
+       */
+      if (this.state.query === query) {
         books = books || []
         this.setState(
           {
