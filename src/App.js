@@ -58,7 +58,10 @@ class BooksApp extends React.Component {
        * queries had run their course.
        */
       if (this.state.query === query) {
-        books = books || []
+        if (typeof books === 'undefined' || books.error) {
+          books = []
+        }
+
         this.setState(
           {
             searchedBooks: books,
