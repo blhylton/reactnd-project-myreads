@@ -1,5 +1,5 @@
 //Librar(y|ies)
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 const BookEntry = (props) => {
