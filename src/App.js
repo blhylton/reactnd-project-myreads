@@ -90,14 +90,9 @@ class BooksApp extends React.Component {
                 </div>
               </div>
             )}
-
-            {!this.state.apiLoaded &&
-              (
-                <span className="loading">Loading</span>
-              )
-            }
           </div>
         )} />
+
         <Route path="/" exact render={() => (
           <div className="list-books">
             <div className="list-books-title">
@@ -115,12 +110,6 @@ class BooksApp extends React.Component {
                     />
                   ))
                 }
-
-                {!this.state.apiLoaded &&
-                  (
-                    <span className="loading">Loading</span>
-                  )
-                }
               </div>
             </div>
             <div className="open-search">
@@ -128,6 +117,13 @@ class BooksApp extends React.Component {
             </div>
           </div>
         )} />
+
+        <Route path="/" render={() =>
+          !this.state.apiLoaded &&
+          (
+            <span className="loading">Loading</span>
+          )
+        } />
       </div>
     )
   }
